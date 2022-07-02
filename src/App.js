@@ -4,7 +4,7 @@ import Wordle from './components/Wordle';
 
 function App() {
   return (
-    <Wordle newWord={"BOATS"}/>
+    <Wordle newWord={"BOATS"} attempts={7}/>
   );
 }
 

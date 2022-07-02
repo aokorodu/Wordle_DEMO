@@ -2,10 +2,10 @@ import React, { useState, useRef } from "react";
 import Word from "./Word";
 import "./Wordle.css";
 
-function Wordle({ newWord }) {
+function Wordle({ newWord, attempts }) {
   const [currentWord, setCurrentWord] = useState(newWord.split(""));
   let currentGuess = [];
-  const maxAttempts = 5;
+  const maxAttempts = attempts;
   const wordLength = 5;
 
   const WRONG = 0;
@@ -99,16 +99,21 @@ function Wordle({ newWord }) {
     currentGuess.pop();
   };
 
+  const getWordComponents = () =>{
+    const arr = [];
+    for(let i = 0; i < maxAttempts; i++){
+      arr.push(<Word key={i} index={i} ref={addToRefs} length={wordLength} />)
+    }
+
+    return arr;
+  }
+
   window.addEventListener("keydown", keyDownHandler);
 
   return (
     <>
       <div className="container">
-        <Word key="0" index="0" ref={addToRefs} length={wordLength} />
-        <Word key="1" index="1" ref={addToRefs} length={wordLength} />
-        <Word key="2" index="2" ref={addToRefs} length={wordLength} />
-        <Word key="3" index="3" ref={addToRefs} length={wordLength} />
-        <Word key="4" index="4" ref={addToRefs} length={wordLength} />
+       {getWordComponents()}
       </div>
     </>
     // <div>
