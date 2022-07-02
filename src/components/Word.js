@@ -3,10 +3,12 @@ import "./Word.css";
 import Card from "./Card";
 
 class Word extends React.Component {
-  constructor({ length }) {
+  constructor({ index, length }) {
     super();
+    this.index = index;
     this.length = length;
     this.cardRefs = [];
+    console.log('word index: ', this.index)
   }
 
   getCards = () => {
@@ -16,7 +18,7 @@ class Word extends React.Component {
       console.log(i);
       const ref = React.createRef();
       this.cardRefs.push(ref);
-      cards.push(<Card key={i} id={i} ref={this.cardRefs[i]} />);
+      cards.push(<Card key={i} id={`${this.index}_${i}`} ref={this.cardRefs[i]} />);
     }
     return cards;
   };

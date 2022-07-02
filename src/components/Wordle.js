@@ -14,13 +14,15 @@ function Wordle({ newWord }) {
 
   const wordRefs = useRef([]);
   wordRefs.current = [];
-  const wordIndex = 0;
+  let wordIndex = 0;
 
   const addToRefs = (el) => {
     if (el && !wordRefs.current.includes(el)) {
       console.log("adding to refs");
       wordRefs.current.push(el);
     }
+
+    console.log('total refs: ', wordRefs.current.length)
   };
 
   const keyDownHandler = (event) => {
@@ -63,13 +65,16 @@ function Wordle({ newWord }) {
       guessArray[i] = res;
     }
 
-   // console.log("check guess: ", guessArray.toString());
-
     const word = wordRefs.current[wordIndex];
     if(word != undefined) word.showResults(guessArray);
 
-    currentGuess = [];
+    nextGuess();
   };
+
+  const nextGuess = ()=>{
+    currentGuess = [];
+    wordIndex++;
+  }
 
   const isALetter = (event) => {
     const keyCode = event.keyCode;
@@ -99,7 +104,11 @@ function Wordle({ newWord }) {
   return (
     <>
       <div className="container">
-        <Word ref={addToRefs} length={wordLength} />
+        <Word key="0" index="0" ref={addToRefs} length={wordLength} />
+        <Word key="1" index="1" ref={addToRefs} length={wordLength} />
+        <Word key="2" index="2" ref={addToRefs} length={wordLength} />
+        <Word key="3" index="3" ref={addToRefs} length={wordLength} />
+        <Word key="4" index="4" ref={addToRefs} length={wordLength} />
       </div>
     </>
     // <div>
