@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
+import { gsap } from "gsap";
 import Word from "./Word";
 import "./Wordle.css";
 
 function Wordle({ newWord, attempts }) {
   const [currentWord, setCurrentWord] = useState(newWord.split(""));
+  const [winner, setWinner] = useState(false);
   let currentGuess = [];
   const maxAttempts = attempts;
   const wordLength = 5;
@@ -22,7 +24,7 @@ function Wordle({ newWord, attempts }) {
       wordRefs.current.push(el);
     }
 
-    console.log('total refs: ', wordRefs.current.length)
+    console.log("total refs: ", wordRefs.current.length);
   };
 
   const keyDownHandler = (event) => {
@@ -66,15 +68,31 @@ function Wordle({ newWord, attempts }) {
     }
 
     const word = wordRefs.current[wordIndex];
-    if(word != undefined) word.showResults(guessArray);
-
-    nextGuess();
+    if (word != undefined) word.showResults(guessArray);
+    if (isGuessCorrect(guessArray)){
+      console.log("winner!!");
+      setTimeout(setWinner, 1500, true);
+    } else {
+      nextGuess();
+    }
+    
   };
 
-  const nextGuess = ()=>{
+  const isGuessCorrect = (guessArray) => {
+    if (
+      guessArray.indexOf(WRONG) == -1 &&
+      guessArray.indexOf(WRONG_PLACE) == -1
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const nextGuess = () => {
     currentGuess = [];
     wordIndex++;
-  }
+  };
 
   const isALetter = (event) => {
     const keyCode = event.keyCode;
@@ -82,7 +100,7 @@ function Wordle({ newWord, attempts }) {
     if (keyCode < 65 || keyCode > 99) {
       return false;
     }
-    if(keyCode === 91) return false;
+    if (keyCode === 91) return false;
     return true;
   };
 
@@ -99,22 +117,22 @@ function Wordle({ newWord, attempts }) {
     currentGuess.pop();
   };
 
-  const getWordComponents = () =>{
+  const getWordComponents = () => {
     const arr = [];
-    for(let i = 0; i < maxAttempts; i++){
-      arr.push(<Word key={i} index={i} ref={addToRefs} length={wordLength} />)
+    for (let i = 0; i < maxAttempts; i++) {
+      arr.push(<Word key={i} index={i} ref={addToRefs} length={wordLength} />);
     }
 
     return arr;
-  }
+  };
 
   window.addEventListener("keydown", keyDownHandler);
 
   return (
     <>
-      <div className="container">
-       {getWordComponents()}
-      </div>
+      {winner && <div>winner</div>}
+      
+      <div className="cardContainer">{getWordComponents()}</div>
     </>
     // <div>
     //   <div>{currentGuess}</div>
