@@ -34,6 +34,7 @@ function Wordle({ newWord }) {
     } else {
       if (event.keyCode === 8) {
         removeLetterFromGuess();
+        typeLetters();
       }
     }
   };
@@ -62,7 +63,10 @@ function Wordle({ newWord }) {
       guessArray[i] = res;
     }
 
-    console.log("check guess: ", guessArray.toString());
+   // console.log("check guess: ", guessArray.toString());
+
+    const word = wordRefs.current[wordIndex];
+    if(word != undefined) word.showResults(guessArray);
 
     currentGuess = [];
   };
@@ -73,6 +77,7 @@ function Wordle({ newWord }) {
     if (keyCode < 65 || keyCode > 99) {
       return false;
     }
+    if(keyCode === 91) return false;
     return true;
   };
 

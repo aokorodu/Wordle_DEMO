@@ -30,7 +30,7 @@ class Word extends React.Component {
 
   showResults = (res) => {
     for (let i = 0; i < this.length; i++) {
-      this.cardRefs[i].current.flip(res[i]);
+      this.cardRefs[i].current.flip(res[i], i*150);
     }
   };
 

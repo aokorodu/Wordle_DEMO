@@ -19,9 +19,19 @@ class Card extends React.Component {
     console.log("letter:", letter)
   }
 
-  flip(){
+  flip(res, delay=0){
+    
+    this.colorCode(res);
     const card = document.querySelector(`#card_${this.id}`);
-    card.classList.add("flip")
+    setTimeout(()=>{card.classList.add("flip")}, delay)
+    
+  }
+
+  colorCode(res){
+    console.log('result: ', res);
+    if(res === 0) this.backFace.classList.add("wrong");
+    if(res === 1) this.backFace.classList.add("wrongPlace");
+    if(res === 2) this.backFace.classList.add("right");
   }
 
   render() {

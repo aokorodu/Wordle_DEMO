@@ -33,7 +33,18 @@
   
   .card .face.back{
     font-size: 3rem;
-    background: #111;
     color: white;
     transform: perspective(500px) rotateY(180deg)
+  }
+
+  .wrongPlace {
+    background: orange;
+  }
+
+  .right {
+    background: green;
+  }
+
+  .wrong {
+    background: #212121;
   }
