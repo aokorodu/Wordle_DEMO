@@ -1,11 +1,14 @@
 import React, { useState, useRef } from "react";
 import { gsap } from "gsap";
 import Word from "./Word";
+import Bumper from "./Bumper";
+import Winner from "./Winner";
 import "./Wordle.css";
 
 function Wordle({ newWord, attempts }) {
   const [currentWord, setCurrentWord] = useState(newWord.split(""));
   const [winner, setWinner] = useState(false);
+  const [loser, setLoser] = useState(false);
   let currentGuess = [];
   const maxAttempts = attempts;
   const wordLength = 5;
@@ -69,13 +72,17 @@ function Wordle({ newWord, attempts }) {
 
     const word = wordRefs.current[wordIndex];
     if (word != undefined) word.showResults(guessArray);
-    if (isGuessCorrect(guessArray)){
+    if (isGuessCorrect(guessArray)) {
       console.log("winner!!");
       setTimeout(setWinner, 1500, true);
     } else {
+      if (wordIndex == maxAttempts - 1) {
+        setTimeout(setLoser, 1500, true);
+        return;
+      }
+
       nextGuess();
     }
-    
   };
 
   const isGuessCorrect = (guessArray) => {
@@ -130,9 +137,10 @@ function Wordle({ newWord, attempts }) {
 
   return (
     <>
-      {winner && <div>winner</div>}
       
       <div className="cardContainer">{getWordComponents()}</div>
+      {loser && <Bumper answer={currentWord} />}
+      {winner && <Winner />}
     </>
     // <div>
     //   <div>{currentGuess}</div>
