@@ -7,7 +7,7 @@ function App() {
     const num = arr.length;
     const ind = Math.floor(Math.random()*num)
 
-    return arr[ind];
+    return arr[ind].toUpperCase();
   }
   return (
     <Wordle newWord={getWord()} attempts={5}/>
