@@ -12,7 +12,7 @@ function Wordle({ newWord, attempts }) {
   const [loser, setLoser] = useState(false);
   let currentGuess = [];
   const maxAttempts = attempts;
-  const wordLength = 5;
+  const wordLength = newWord.length;
 
   const WRONG = 0;
   const WRONG_PLACE = 1;
