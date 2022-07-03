@@ -24,7 +24,7 @@ class Keyboard extends React.Component {
   render() {
     return (
       <div>
-        <svg width="500" height="200" viewBox="0 0 390 140">
+        <svg width="400" height="160" viewBox="0 0 390 140">
           <g id="keyboard">
             <g className="key" id="Q">
               <rect
