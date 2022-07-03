@@ -1,0 +1,15 @@
+.key rect{
+    stroke:white;
+    transition-property: stroke;
+    transition-duration: 222ms;
+    transition-timing-function: linear;
+    cursor: arrow;
+}
+
+.key:hover rect{
+    stroke:#212121;
+}
+
+text{
+    pointer-events: none;
+}
