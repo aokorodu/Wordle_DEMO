@@ -7,7 +7,7 @@ class Keyboard extends React.Component {
     this.keys = null;
     this.onKeyPress = onKeyPress;
     this.defaultFill = "#D9D9D9";
-    this.wrongFill = "#767676";
+    this.wrongFill = "#212121";
     this.wrongPlaceFill = "#FFA500";
     this.rightFill = "#008000"
   }
@@ -26,16 +26,18 @@ class Keyboard extends React.Component {
 
   showKeyStatus(key, status) {
     const el = document.querySelector(`#${key}`);
+    const text = el.querySelector("text");
     const color = el.getAttribute("fill");
 
     if(color == this.rightFill) return;
-    
+
     let statusColor;
     if(status == 0) statusColor = this.wrongFill;
     if(status == 1) statusColor = this.wrongPlaceFill;
     if(status == 2) statusColor = this.rightFill;
 
     el.setAttribute("fill", statusColor);
+    text.setAttribute("fill", "#FFF");
     
   }
 
