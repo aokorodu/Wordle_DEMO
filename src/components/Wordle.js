@@ -7,6 +7,7 @@ import Keyboard from "./Keyboard";
 import "./Wordle.css";
 
 function Wordle({ newWord, attempts }) {
+  console.log('New word: ', newWord, ' -------------------')
   const [currentWord, setCurrentWord] = useState(newWord.split(""));
   const [winner, setWinner] = useState(false);
   const [loser, setLoser] = useState(false);
@@ -21,6 +22,8 @@ function Wordle({ newWord, attempts }) {
   const wordRefs = useRef([]);
   wordRefs.current = [];
   let wordIndex = 0;
+
+  const keyboard = useRef();
 
   const addToRefs = (el) => {
     if (el && !wordRefs.current.includes(el)) {
@@ -101,9 +104,16 @@ function Wordle({ newWord, attempts }) {
         return;
       }
 
+      updateKeyboard(guessArray)
       nextGuess();
     }
   };
+
+  const updateKeyboard = (guessArray)=>{
+    currentGuess.forEach((currentLetter, index)=>{
+      keyboard.current.showKeyStatus(currentLetter, guessArray[index])
+    })
+  }
 
   const isGuessCorrect = (guessArray) => {
     if (
@@ -161,7 +171,7 @@ function Wordle({ newWord, attempts }) {
         <div className="cardContainer">
           <div>{getWordComponents()}</div>
         </div>
-        <Keyboard key={0} onKeyPress={keyboardHandler}/>
+        <Keyboard key={0} ref={keyboard} onKeyPress={keyboardHandler}/>
       </div>
       {loser && <Bumper answer={currentWord} />}
       {winner && <Winner />}
