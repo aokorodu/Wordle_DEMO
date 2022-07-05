@@ -40,6 +40,13 @@
     transform: perspective(500px) rotateY(180deg)
   }
 
+  .card .face.default{
+    font-size: 3rem;
+    color: black;
+    background-color: white;
+    transform: perspective(500px) rotateY(180deg)
+  }
+
   .wrongPlace {
     background: orange;
   }

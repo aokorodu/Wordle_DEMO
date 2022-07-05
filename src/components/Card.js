@@ -9,12 +9,12 @@ class Card extends React.Component {
     this.backFace = undefined;
   }
 
-  typeLetter(letter){
+  typeLetter(letter, blank=false){
     if(this.frontFace == undefined){
       this.frontFace = document.querySelector(`#front_${this.id}`);
       this.backFace = document.querySelector(`#back_${this.id}`);
     } 
-    this.frontFace.textContent = letter;
+    if(!blank) this.frontFace.textContent = letter;
     this.backFace.textContent = letter;
     console.log("letter:", letter)
   }
