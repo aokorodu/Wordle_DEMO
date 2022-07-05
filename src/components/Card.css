@@ -31,7 +31,7 @@
   }
   
   .flip {
-    transform: perspective(500px) rotateY(180deg)
+    transform: translateZ(1000px) rotateY(180deg);
   }
   
   .card .face.back{
