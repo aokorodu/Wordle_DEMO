@@ -7,8 +7,8 @@ import Keyboard from "./Keyboard";
 import "./Wordle.css";
 
 function Wordle({ newWord, attempts }) {
-  console.log('New word: ', newWord, ' -------------------')
-  const [currentWord, setCurrentWord] = useState(newWord.split(""));
+  console.log("New word: ", newWord, " -------------------");
+  const currentWord = newWord.split("");
   const [winner, setWinner] = useState(false);
   const [loser, setLoser] = useState(false);
   let currentGuess = [];
@@ -27,47 +27,38 @@ function Wordle({ newWord, attempts }) {
 
   const addToRefs = (el) => {
     if (el && !wordRefs.current.includes(el)) {
-      console.log("adding to refs");
       wordRefs.current.push(el);
     }
-
-    console.log("total refs: ", wordRefs.current.length);
   };
 
   const keyDownHandler = (event) => {
-    if (isALetter(event)) {
-      addLetterToGuess(getLetter(event));
-      typeLetters();
-      if (currentGuess.length === wordLength) {
-        checkGuess();
-      }
-      return;
-    } else {
-      if (event.keyCode === 8) {
-        removeLetterFromGuess();
-        typeLetters();
-      }
-    }
+    guessHandler(getLetter(event));
   };
 
-  const keyboardHandler = (key)=>{
-    console.log('keyboardhandler: ', key);
-    
+  const keyboardHandler = (key) => {
+    guessHandler(key);
+  };
 
-    if ((key != "BACK") && (key != "ENTER")) {
+  const guessHandler = (key) => {
+    console.log('Key: ', key)
+    if (isALetter(key) && currentGuess.length < wordLength) {
       addLetterToGuess(key);
       typeLetters();
+      
+    }
+    if (key === "BACKSPACE" || key === "BACK")  {
+      removeLetterFromGuess();
+      typeLetters();
+      return;
+    }
+
+    if(key === "ENTER"){
       if (currentGuess.length === wordLength) {
         checkGuess();
       }
       return;
-    } else {
-      if (key === "BACK") {
-        removeLetterFromGuess();
-        typeLetters();
-      }
     }
-  }
+  };
 
   const typeLetters = () => {
     if (wordRefs.current[wordIndex] == undefined) return;
@@ -104,16 +95,16 @@ function Wordle({ newWord, attempts }) {
         return;
       }
 
-      updateKeyboard(guessArray)
+      updateKeyboard(guessArray);
       nextGuess();
     }
   };
 
-  const updateKeyboard = (guessArray)=>{
-    currentGuess.forEach((currentLetter, index)=>{
-      keyboard.current.showKeyStatus(currentLetter, guessArray[index])
-    })
-  }
+  const updateKeyboard = (guessArray) => {
+    currentGuess.forEach((currentLetter, index) => {
+      keyboard.current.showKeyStatus(currentLetter, guessArray[index]);
+    });
+  };
 
   const isGuessCorrect = (guessArray) => {
     if (
@@ -131,18 +122,15 @@ function Wordle({ newWord, attempts }) {
     wordIndex++;
   };
 
-  const isALetter = (event) => {
-    const keyCode = event.keyCode;
-    console.log(keyCode);
-    if (keyCode < 65 || keyCode > 99) {
-      return false;
-    }
-    if (keyCode === 91) return false;
+  const isALetter = (key) => {
+    const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if(alpha.indexOf(key) == -1) return false
     return true;
   };
 
   const getLetter = (event) => {
-    return event.code.slice(-1);
+    console.log(event)
+    return event.key.toUpperCase();
   };
 
   const addLetterToGuess = (newLetter) => {
@@ -171,7 +159,7 @@ function Wordle({ newWord, attempts }) {
         <div className="cardContainer">
           <div>{getWordComponents()}</div>
         </div>
-        <Keyboard key={0} ref={keyboard} onKeyPress={keyboardHandler}/>
+        <Keyboard key={0} ref={keyboard} onKeyPress={keyboardHandler} />
       </div>
       {loser && <Bumper answer={currentWord} />}
       {winner && <Winner />}
