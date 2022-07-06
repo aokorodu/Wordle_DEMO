@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { gsap } from "gsap";
 import Word from "./Word";
 import Bumper from "./Bumper";
 import Winner from "./Winner";
@@ -7,10 +6,10 @@ import Keyboard from "./Keyboard";
 import "./Wordle.css";
 
 function Wordle({ newWord, attempts }) {
-  console.log("New word: ", newWord, " -------------------");
-  const currentWord = newWord.split("");
+  console.log('WORD: ', newWord, '-------------')
   const [winner, setWinner] = useState(false);
   const [loser, setLoser] = useState(false);
+  const currentWord = newWord.split("");
   let currentGuess = [];
   const maxAttempts = attempts;
   const wordLength = newWord.length;
@@ -20,12 +19,11 @@ function Wordle({ newWord, attempts }) {
   const RIGHT = 2;
 
   const wordRefs = useRef([]);
-  wordRefs.current = [];
   let wordIndex = 0;
 
   const keyboard = useRef();
 
-  const addToRefs = (el) => {
+  const addToWordRefs = (el) => {
     if (el && !wordRefs.current.includes(el)) {
       wordRefs.current.push(el);
     }
@@ -63,29 +61,34 @@ function Wordle({ newWord, attempts }) {
   const typeLetters = () => {
     if (wordRefs.current[wordIndex] == undefined) return;
 
-    console.log("length: ", wordRefs.current.length);
-    console.log("wordle typeLetters");
     const word = wordRefs.current[wordIndex];
     word.typeLetters(currentGuess);
   };
 
   const checkGuess = () => {
+    // FIRST, check which letters are right/wrong/wrong place
     let guessArray = [];
     for (let i = 0; i < wordLength; i++) {
       let res = WRONG;
       const answerLetter = currentWord[i];
       const guessLetter = currentGuess[i];
 
-      if (answerLetter === guessLetter) {
+      // if answer == guess, the result is RIGHT
+      // else if guess is somewhere in the current word, answer is WRONG_PLACE
+      if (answerLetter === guessLetter){
         res = RIGHT;
-      } else if (currentWord.indexOf(guessLetter) > -1) {
-        res = WRONG_PLACE;
-      }
+      } else if (currentWord.indexOf(guessLetter) > -1) res = WRONG_PLACE;
+      
+      
+      
       guessArray[i] = res;
     }
 
+    // NEXT find current word and show results
     const word = wordRefs.current[wordIndex];
     if (word != undefined) word.showResults(guessArray);
+
+    // if guess is correct, setWinner(true). Otherwise setLoser(true)
     if (isGuessCorrect(guessArray)) {
       console.log("winner!!");
       setTimeout(setWinner, 1500, true);
@@ -95,7 +98,9 @@ function Wordle({ newWord, attempts }) {
         return;
       }
 
+      //  update keyboard with the results (highlight right/wrong/wrongplace aswers)
       updateKeyboard(guessArray);
+      // move on to the next guess
       nextGuess();
     }
   };
@@ -145,7 +150,7 @@ function Wordle({ newWord, attempts }) {
   const getWordComponents = () => {
     const arr = [];
     for (let i = 0; i < maxAttempts; i++) {
-      arr.push(<Word key={i} index={i} ref={addToRefs} length={wordLength} />);
+      arr.push(<Word key={i} index={i} ref={addToWordRefs} length={wordLength} />);
     }
 
     return arr;
@@ -164,10 +169,6 @@ function Wordle({ newWord, attempts }) {
       {loser && <Bumper answer={currentWord} />}
       {winner && <Winner />}
     </>
-    // <div>
-    //   <div>{currentGuess}</div>
-    //   <Word answer={currentWord} guess={currentGuess} />
-    // </div>
   );
 }
 
