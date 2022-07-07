@@ -14,7 +14,7 @@ class Keyboard extends React.Component {
 
   componentDidMount() {
     console.log("Keyboard componentDidMount-------------");
-    this.keys = document.querySelectorAll(".key");
+    this.keys = document.querySelectorAll(`.${styles.key}`);
     console.log("keys:", this.keys.length);
     this.keys.forEach((key) => {
       key.addEventListener("click", () => {
