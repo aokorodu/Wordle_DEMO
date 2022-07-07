@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import Wordle from "./components/Wordle";
 
 function App() {
@@ -401,13 +401,13 @@ function App() {
     <>
       {start && <Wordle newWord={getWord()} attempts={max} />}
       {!start && (
-        <div className="settingsHolder">
+        <div className={styles.settingsHolder}>
           <div>WORDL DEMO</div>
-          <div className="attemptHolder">
+          <div className={styles.attemptHolder}>
             <div>
               <span>Max Attempts</span>
               <select
-                className="settingsSelect"
+                className={styles.settingsSelect}
                 name="attempts"
                 onChange={updateAttempts}
                 defaultValue="6"
@@ -422,7 +422,7 @@ function App() {
             <div>
               <span>Word Length</span>
               <select
-                className="settingsSelect"
+                className={styles.settingsSelect}
                 name="length"
                 onChange={updateLength}
                 defaultValue="5"
