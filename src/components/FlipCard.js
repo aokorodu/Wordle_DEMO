@@ -1,5 +1,6 @@
 import React from "react";
-import "./Card.css";
+import CardCSS from './Card.module.css';
+import cx from 'classnames'
 
 function FlipCard({ id, letter, delay }) {
   const i = id;
@@ -12,7 +13,7 @@ function FlipCard({ id, letter, delay }) {
     
     setTimeout(() => {
       const card = document.querySelector(str);
-      card.classList.add("flip");
+      card.classList.add(CardCSS.flip);
     }, del);
   };
 
@@ -20,9 +21,9 @@ function FlipCard({ id, letter, delay }) {
 
   return (
     <>
-      <div id={`flipcard_${i}`} className={"card"}>
-        <div className="face front"></div>
-        <div className="face default">
+      <div id={`flipcard_${i}`} className={CardCSS.card}>
+        <div className={cx(CardCSS.face, CardCSS.front)}></div>
+        <div className={cx(CardCSS.face, CardCSS.default)}>
           {l}
         </div>
       </div>

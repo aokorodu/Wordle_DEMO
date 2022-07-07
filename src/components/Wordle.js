@@ -3,7 +3,7 @@ import Word from "./Word";
 import Bumper from "./Bumper";
 import Winner from "./Winner";
 import Keyboard from "./Keyboard";
-import "./Wordle.css";
+import styles from "./Wordle.module.css";
 
 function Wordle({ newWord, attempts }) {
   console.log('WORD: ', newWord, '-------------')
@@ -160,8 +160,8 @@ function Wordle({ newWord, attempts }) {
 
   return (
     <>
-      <div className="container">
-        <div className="cardContainer">
+      <div className={styles.container}>
+        <div className={styles.cardContainer}>
           <div>{getWordComponents()}</div>
         </div>
         <Keyboard key={0} ref={keyboard} onKeyPress={keyboardHandler} />

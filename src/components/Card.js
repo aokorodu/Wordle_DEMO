@@ -1,5 +1,6 @@
 import React from "react";
-import './Card.css'
+import CardCSS from './Card.module.css';
+import cx from 'classnames'
 
 class Card extends React.Component {
   constructor({id}) {
@@ -23,23 +24,23 @@ class Card extends React.Component {
     
     this.colorCode(res);
     const card = document.querySelector(`#card_${this.id}`);
-    setTimeout(()=>{card.classList.add("flip")}, delay)
+    setTimeout(()=>{card.classList.add(CardCSS.flip)}, delay)
     
   }
 
   colorCode(res){
     console.log('result: ', res);
-    if(res === 0) this.backFace.classList.add("wrong");
-    if(res === 1) this.backFace.classList.add("wrongPlace");
-    if(res === 2) this.backFace.classList.add("right");
+    if(res === 0) this.backFace.classList.add(CardCSS.wrong);
+    if(res === 1) this.backFace.classList.add(CardCSS.wrongPlace);
+    if(res === 2) this.backFace.classList.add(CardCSS.right);
   }
 
   render() {
     return (
       <>
-        <div id={`card_${this.id}`} className={"card"}>
-          <div id={`front_${this.id}`} className="face front"></div>
-          <div id={`back_${this.id}`} className="face back"></div>
+        <div id={`card_${this.id}`} className={CardCSS.card}>
+          <div id={`front_${this.id}`} className={cx(CardCSS.face, CardCSS.front)}></div>
+          <div id={`back_${this.id}`} className={cx(CardCSS.face, CardCSS.back)}></div>
         </div>
       </>
     );

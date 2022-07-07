@@ -1,10 +1,10 @@
-import "./Bumper.css";
+import BumperCSS from './Bumper.module.css'
 
 function Winner() {
 
   return (
     <>
-      <div className="holder">
+      <div className={BumperCSS.holder}>
         <div>You Win!!!</div>
       </div>
     </>

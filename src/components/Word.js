@@ -1,5 +1,5 @@
 import React from "react";
-import "./Word.css";
+import styles from "./Word.module.css";
 import Card from "./Card";
 
 class Word extends React.Component {
@@ -35,7 +35,7 @@ class Word extends React.Component {
   render() {
     return (
       <>
-        <div className="cardRow">{this.getCards()}</div>
+        <div className={styles.cardRow}>{this.getCards()}</div>
       </>
     );
   }
