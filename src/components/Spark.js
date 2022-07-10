@@ -30,7 +30,6 @@ class Spark extends React.Component {
   }
 
   activate(x, y) {
-    console.log('activate-----------');
     this.position.startX = x;
     this.position.startY = y;
     this.active = true;

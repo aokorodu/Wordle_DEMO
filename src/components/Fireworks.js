@@ -2,8 +2,10 @@ import React, { useRef } from "react";
 import Spark from "./Spark";
 import styles from "./Fireworks.module.css";
 
-function Fireworks() {
-  const num = 60;
+function Fireworks({explosions}) {
+  const numberOfSparks = 60;
+  const numberOfExplosions = explosions;
+  let currentExplosion = 0;
   const fwRef = useRef([]);
   let animating = false;
 
@@ -14,7 +16,10 @@ function Fireworks() {
   };
 
   const fire = () => {
-    console.log("----------- FIRE -----------------");
+    currentExplosion++;
+    if(currentExplosion > numberOfExplosions) return;
+    console.log(`---------- FIRE ${currentExplosion}-----------------`);
+
     const launchX = 100 + Math.random()*300;
     const launchY = 50 + Math.random()*100
     fwRef.current.forEach((spark, index) => {
@@ -27,7 +32,7 @@ function Fireworks() {
       animating = true;
       window.requestAnimationFrame(animateSparks);
     }
-    setTimeout(fire, 1000 + Math.random()*2000);
+    setTimeout(fire, 1500 + Math.random()*2000);
   };
 
   const animateSparks = () => {
@@ -40,7 +45,7 @@ function Fireworks() {
 
   const getSparks = () => {
     const arr = [];
-    for (let i = 0; i < num; i++) {
+    for (let i = 0; i < numberOfSparks; i++) {
       arr.push(<Spark key={i} ref={addToFWRefs} x={250} y={50} />);
     }
 

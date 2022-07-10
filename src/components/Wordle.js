@@ -39,7 +39,6 @@ function Wordle({ newWord, attempts }) {
   };
 
   const guessHandler = (key) => {
-    console.log('Key: ', key)
     if (isALetter(key) && currentGuess.length < wordLength) {
       addLetterToGuess(key);
       typeLetters();
