@@ -3,7 +3,7 @@ import Spark from "./Spark";
 import styles from "./Fireworks.module.css";
 
 function Fireworks({explosions}) {
-  const numberOfSparks = 60;
+  const numberOfSparks = 50;
   const numberOfExplosions = explosions;
   let currentExplosion = 0;
   const fwRef = useRef([]);
