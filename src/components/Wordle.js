@@ -4,6 +4,7 @@ import Bumper from "./Bumper";
 import Winner from "./Winner";
 import Keyboard from "./Keyboard";
 import styles from "./Wordle.module.css";
+import {isALetter, getLetter} from '../utils/helperFunctions'
 
 function Wordle({ newWord, attempts }) {
   console.log('WORD: ', newWord, '-------------')
@@ -127,20 +128,8 @@ function Wordle({ newWord, attempts }) {
     wordIndex++;
   };
 
-  const isALetter = (key) => {
-    const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if(alpha.indexOf(key) == -1) return false
-    return true;
-  };
-
-  const getLetter = (event) => {
-    console.log(event)
-    return event.key.toUpperCase();
-  };
-
   const addLetterToGuess = (newLetter) => {
     currentGuess.push(newLetter);
-    console.log("current guess: ", currentGuess.toLocaleString());
   };
 
   const removeLetterFromGuess = () => {
@@ -160,14 +149,17 @@ function Wordle({ newWord, attempts }) {
 
   return (
     <>
+    
       <div className={styles.container}>
         <div className={styles.cardContainer}>
+        
           <div>{getWordComponents()}</div>
         </div>
         <Keyboard key={0} ref={keyboard} onKeyPress={keyboardHandler} />
       </div>
       {loser && <Bumper answer={currentWord} />}
       {winner && <Winner />}
+      
     </>
   );
 }
