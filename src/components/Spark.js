@@ -5,6 +5,7 @@ class Spark extends React.Component {
     super();
     this.velocity = Math.random() * 5 + 0.1;
     this.angle = Math.random() * 2 * Math.PI;
+    this.color =`hsl(${Math.floor(Math.random()*360)}, 100%, 85%)`;
     this.position = {
       startX: x,
       startY: y,
@@ -28,8 +29,10 @@ class Spark extends React.Component {
     return this.active;
   }
 
-  activate() {
-    console.log('activate-----------')
+  activate(x, y) {
+    console.log('activate-----------');
+    this.position.startX = x;
+    this.position.startY = y;
     this.active = true;
     this.reset();
   }
@@ -112,8 +115,8 @@ class Spark extends React.Component {
           ref={this.graphicRef}
           cx={this.position.xpos}
           cy={this.position.ypos}
-          r={4}
-          fill="white"
+          r={3}
+          fill={this.color}
           stroke="none"
           opacity={0}
         ></circle>

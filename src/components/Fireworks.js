@@ -15,9 +15,11 @@ function Fireworks() {
 
   const fire = () => {
     console.log("----------- FIRE -----------------");
+    const launchX = 100 + Math.random()*300;
+    const launchY = 50 + Math.random()*100
     fwRef.current.forEach((spark, index) => {
       if (!spark.isActive()) {
-        spark.activate();
+        spark.activate(launchX, launchY );
       }
     });
 
@@ -25,7 +27,7 @@ function Fireworks() {
       animating = true;
       window.requestAnimationFrame(animateSparks);
     }
-    setTimeout(fire, 5000);
+    setTimeout(fire, 1000 + Math.random()*2000);
   };
 
   const animateSparks = () => {

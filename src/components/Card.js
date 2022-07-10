@@ -17,7 +17,6 @@ class Card extends React.Component {
     } 
     if(!blank) this.frontFace.textContent = letter;
     this.backFace.textContent = letter;
-    console.log("letter:", letter)
   }
 
   flip(res, delay=0){
@@ -29,7 +28,6 @@ class Card extends React.Component {
   }
 
   colorCode(res){
-    console.log('result: ', res);
     if(res === 0) this.backFace.classList.add(CardCSS.wrong);
     if(res === 1) this.backFace.classList.add(CardCSS.wrongPlace);
     if(res === 2) this.backFace.classList.add(CardCSS.right);
