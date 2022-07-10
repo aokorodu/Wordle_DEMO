@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 class Point {
   constructor(x, y) {
@@ -12,15 +12,16 @@ class Spark extends React.Component {
     super();
     this.velocity = Math.random() * 5 + 0.1;
     this.angle = Math.random() * 2 * Math.PI;
-    this.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 85%)`;
+    this.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+    this.radius = Math.round(1 + Math.random() * 2);
     this.position = {
       startPoint: new Point(x, y),
       currentPoint: new Point(x, y),
       priorPoints: [],
       mx: maxX,
       my: maxY,
-      velocityX: Math.cos(this.angle) * this.velocity,
-      velocityY: Math.sin(this.angle) * this.velocity,
+      velocityX: Math.random() * 8 - 4,//Math.cos(this.angle) * this.velocity,
+      velocityY: Math.random() * 8 - 4, //Math.sin(this.angle) * this.velocity,
       accelerationX: 0,
       accelerationY: 0.05,
     };
@@ -137,7 +138,7 @@ class Spark extends React.Component {
           ref={this.graphicRef}
           cx={this.position.currentPoint.x}
           cy={this.position.currentPoint.y}
-          r={3}
+          r={this.radius}
           fill={this.color}
           stroke="none"
           opacity={0}

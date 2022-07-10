@@ -5,7 +5,7 @@ function Winner() {
   return (
     <>
       <div className={BumperCSS.holder}>
-        <Fireworks explosions={10}></Fireworks>
+        <Fireworks explosions={20}></Fireworks>
         <div className={BumperCSS.textHolder}>You Win!!!</div>
       </div>
     </>
