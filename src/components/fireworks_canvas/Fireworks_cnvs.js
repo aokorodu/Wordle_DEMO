@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import Spark from "./Spark";
 import styles from "./Fireworks.module.css";
 
-function Fireworks({ explosions }) {
+function Fireworks_CNVS({ explosions }) {
   const numberOfSparks = 500;
   const numberOfExplosions = explosions;
   let currentExplosion = 0;
@@ -76,4 +76,4 @@ function Fireworks({ explosions }) {
   );
 }
 
-export default Fireworks;
+export default Fireworks_CNVS;

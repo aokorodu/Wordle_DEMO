@@ -6,6 +6,7 @@ function App() {
   const [max, setMax] = useState(6);
   const [length, setLength] = useState(5);
   const [start, setStart] = useState(false);
+  const [canvasFireworks, setCanvasFireworks] = useState(false)
 
   const getWord = () => {
     let arr_5 = [
@@ -417,13 +418,19 @@ function App() {
     setLength(e.target.value);
   };
 
+  const updateFireworks = (e) =>{
+    const newVal = e.target.value;
+    console.log('new value: ', newVal)
+    newVal == 0 ? setCanvasFireworks(false) : setCanvasFireworks(true)
+  }
+
   const beginGame = () => {
     setStart(true);
   };
 
   return (
     <>
-      {start && <Wordle newWord={getWord()} attempts={max} />}
+      {start && <Wordle newWord={getWord()} attempts={max} canvasFireworks={canvasFireworks}/>}
       {!start && (
         <div className={styles.settingsHolder}>
           <div>WORDL DEMO</div>
@@ -454,6 +461,19 @@ function App() {
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
+              </select>
+            </div>
+
+            <div>
+              <span>Fireworks</span>
+              <select
+                className={styles.settingsSelect}
+                name="fireworks"
+                onChange={updateFireworks}
+                defaultValue="0"
+              >
+                <option value={0}>SVG</option>
+                <option value={1}>Canvas</option>
               </select>
             </div>
 
