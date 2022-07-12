@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Spark from "./Spark";
 import styles from "./Fireworks.module.css";
 
-function Fireworks({explosions}) {
+function Fireworks_orig({explosions}) {
   const numberOfSparks = 60;
   const numberOfExplosions = explosions;
   let currentExplosion = 0;
@@ -22,7 +22,7 @@ function Fireworks({explosions}) {
 
     const launchX = 100 + Math.random()*300;
     const launchY = 50 + Math.random()*100
-    fwRef.current.forEach((spark, index) => {
+    fwRef.current.forEach((spark) => {
       if (!spark.isActive()) {
         spark.activate(launchX, launchY );
       }
@@ -36,7 +36,7 @@ function Fireworks({explosions}) {
   };
 
   const animateSparks = () => {
-    fwRef.current.forEach((spark, index) => {
+    fwRef.current.forEach((spark) => {
       spark.update();
     });
 
@@ -65,4 +65,4 @@ function Fireworks({explosions}) {
   );
 }
 
-export default Fireworks;
+export default Fireworks_orig;

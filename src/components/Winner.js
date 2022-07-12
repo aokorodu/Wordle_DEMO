@@ -1,4 +1,4 @@
-import Fireworks from "./Fireworks";
+import Fireworks from "./fireworks_canvas/Fireworks"
 import BumperCSS from "./Bumper.module.css";
 
 function Winner() {
