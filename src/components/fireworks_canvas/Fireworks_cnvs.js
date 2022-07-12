@@ -58,7 +58,7 @@ function Fireworks_CNVS({ explosions }) {
     return arr;
   };
 
-  setTimeout(fire, 2000);
+  setTimeout(fire, 1000);
 
   return (
     <>
