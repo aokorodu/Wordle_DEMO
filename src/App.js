@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./App.module.css";
 import Wordle from "./components/Wordle";
 
@@ -6,8 +6,10 @@ function App() {
   const [max, setMax] = useState(6);
   const [length, setLength] = useState(5);
   const [start, setStart] = useState(false);
-  const [canvasFireworks, setCanvasFireworks] = useState(false)
-
+  const [canvasFireworks, setCanvasFireworks] = useState(true);
+  const [fwPalette, setFWPalette] = useState("random")
+  const fwColorArray = [];
+  const fwColorTF = useRef(null)
   const getWord = () => {
     let arr_5 = [
       "ALBUM",
@@ -418,19 +420,33 @@ function App() {
     setLength(e.target.value);
   };
 
-  const updateFireworks = (e) =>{
+  const updateFireworks = (e) => {
     const newVal = e.target.value;
-    console.log('new value: ', newVal)
-    newVal == 0 ? setCanvasFireworks(false) : setCanvasFireworks(true)
-  }
+    console.log("new value: ", newVal);
+    newVal == 0 ? setCanvasFireworks(false) : setCanvasFireworks(true);
+  };
+
+  const updatePalette = (e) => {
+    const newVal = e.target.value;
+    console.log("new palette: ", newVal);
+    setFWPalette(newVal)
+  };
 
   const beginGame = () => {
     setStart(true);
   };
 
+
   return (
     <>
-      {start && <Wordle newWord={getWord()} attempts={max} canvasFireworks={canvasFireworks}/>}
+      {start && (
+        <Wordle
+          newWord={getWord()}
+          attempts={max}
+          canvasFireworks={canvasFireworks}
+          colorPalette={fwPalette}
+        />
+      )}
       {!start && (
         <div className={styles.settingsHolder}>
           <div>WORDL DEMO</div>
@@ -470,10 +486,22 @@ function App() {
                 className={styles.settingsSelect}
                 name="fireworks"
                 onChange={updateFireworks}
-                defaultValue="0"
+                defaultValue="1"
               >
                 <option value={0}>SVG</option>
                 <option value={1}>Canvas</option>
+              </select>
+            </div>
+            <div>
+              <span>Color Palette</span>
+              <select
+                className={styles.settingsSelect}
+                name="palette"
+                onChange={updatePalette}
+                defaultValue="random"
+              >
+                <option value="random">random</option>
+                <option value="tmobile">t-mobile</option>
               </select>
             </div>
 

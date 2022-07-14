@@ -2,12 +2,41 @@ import React, { useRef } from "react";
 import Spark from "./Spark";
 import styles from "./Fireworks.module.css";
 
-function Fireworks_orig({explosions}) {
+function Fireworks_orig({explosions, colorPalette}) {
   const numberOfSparks = 60;
   const numberOfExplosions = explosions;
   let currentExplosion = 0;
+  let fwPalette = colorPalette
   const fwRef = useRef([]);
   let animating = false;
+
+  const getColors = ()=>{
+    const tMobile = [
+      "#FBD9EA",
+      "#F9AFD6",
+      "#F970B5",
+      "#E65BA2",
+      "#E22387",
+      "#E20074",
+      "#B6105F",
+      "#A10053",
+      "#6B0438",
+      "#450224",
+      "#200010",
+      "#E20074",
+    ];
+
+    let randomHSL = new Array(360);
+    for(let i = 0; i < 360; i++){
+      randomHSL[i] = `hsl(${i}, 100%, 50%)`
+    }
+
+    const selectedPalette = fwPalette == "random" ? randomHSL : tMobile;
+
+    console.log('selectedPalette: ', selectedPalette)
+
+    return selectedPalette;
+  }
 
   const addToFWRefs = (el) => {
     if (el && !fwRef.current.includes(el)) {
@@ -45,8 +74,11 @@ function Fireworks_orig({explosions}) {
 
   const getSparks = () => {
     const arr = [];
+    const colors = getColors();
     for (let i = 0; i < numberOfSparks; i++) {
-      arr.push(<Spark key={i} ref={addToFWRefs} x={250} y={50} />);
+      const num = Math.floor(Math.random() * colors.length);
+      const color = colors[num];
+      arr.push(<Spark key={i} ref={addToFWRefs} color={color}/>);
     }
 
     return arr;

@@ -8,18 +8,18 @@ class Point {
 }
 
 class Spark extends React.Component {
-  constructor({ x, y, maxX = 500, maxY = 500 }) {
+  constructor({ color }) {
     super();
     this.velocity = Math.random() * 5 + 0.1;
     this.angle = Math.random() * 2 * Math.PI;
-    this.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+    this.color = color
     this.radius = Math.round(1 + Math.random() * 2);
     this.position = {
-      startPoint: new Point(x, y),
-      currentPoint: new Point(x, y),
+      startPoint: new Point(0, 0),
+      currentPoint: new Point(0, 0),
       priorPoints: [],
-      mx: maxX,
-      my: maxY,
+      mx: 500,
+      my: 500,
       velocityX: Math.random() * 8 - 4,//Math.cos(this.angle) * this.velocity,
       velocityY: Math.random() * 8 - 4, //Math.sin(this.angle) * this.velocity,
       accelerationX: 0,
@@ -60,6 +60,7 @@ class Spark extends React.Component {
   }
 
   reset() {
+    this.angle = Math.random() * 2 * Math.PI;
     this.position.currentPoint.x = this.position.startPoint.x;
     this.position.currentPoint.y = this.position.startPoint.y;
     this.position.velocityX = Math.cos(this.angle) * this.velocity;
@@ -143,7 +144,7 @@ class Spark extends React.Component {
           stroke="none"
           opacity={0}
         ></circle>
-        <path ref={this.trailRef} d="" stroke="white" strokeWidth={1} fill="none" opacity={0}/>
+        <path ref={this.trailRef} d="" stroke={this.color} strokeWidth={1} fill="none" opacity={0}/>
       </>
     );
   }

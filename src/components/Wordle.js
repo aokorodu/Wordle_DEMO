@@ -6,12 +6,14 @@ import Keyboard from "./Keyboard";
 import styles from "./Wordle.module.css";
 import {isALetter, getLetter} from '../utils/helperFunctions'
 
-function Wordle({ newWord, attempts, canvasFireworks }) {
+function Wordle({ newWord, attempts, canvasFireworks, colorPalette }) {
   console.log('WORD: ', newWord, '-------------');
   console.log('canvasFireworks: ', canvasFireworks)
+  console.log('wordle colorPalette: ', colorPalette)
   const [winner, setWinner] = useState(false);
   const [loser, setLoser] = useState(false);
   const cnvsFireworks = canvasFireworks;
+  const clrPalette = colorPalette
   const currentWord = newWord.split("");
   let currentGuess = [];
   const maxAttempts = attempts;
@@ -146,6 +148,8 @@ function Wordle({ newWord, attempts, canvasFireworks }) {
     return arr;
   };
 
+  
+
   window.addEventListener("keydown", keyDownHandler);
 
   return (
@@ -159,7 +163,7 @@ function Wordle({ newWord, attempts, canvasFireworks }) {
         <Keyboard key={0} ref={keyboard} onKeyPress={keyboardHandler} />
       </div>
       {loser && <Bumper answer={currentWord} />}
-      {winner && <Winner canvasFireworks={cnvsFireworks}/>}
+      {winner && <Winner canvasFireworks={cnvsFireworks} colorPalette={clrPalette}/>}
       
     </>
   );
