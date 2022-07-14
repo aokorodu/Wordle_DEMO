@@ -60,6 +60,7 @@ class Spark extends React.Component {
   }
 
   reset() {
+    this.angle = Math.random() * 2 * Math.PI;
     this.position.currentPoint.x = this.position.startPoint.x;
     this.position.currentPoint.y = this.position.startPoint.y;
     this.position.velocityX = Math.cos(this.angle) * this.velocity;

@@ -8,11 +8,13 @@ class Point {
 }
 
 class Spark {
-  constructor(ctx) {
+  constructor(ctx, color) {
     this.ctx = ctx;
     this.velocity = Math.random() * 5 + 0.1;
     this.angle = Math.random() * 2 * Math.PI;
-    this.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+    //console.log('passed in color: ', color)
+    this.color = color || "white";
+    //console.log('color: ', this.color)
     this.radius = Math.round(1 + Math.random() * 2);
     this.numberOfPoints = 35;
     this.position = {
@@ -21,10 +23,10 @@ class Spark {
       priorPoints: [],
       mx: 500,
       my: 500,
-      velocityX: Math.random() * 8 - 4, //Math.cos(this.angle) * this.velocity,
-      velocityY: Math.random() * 8 - 4, //Math.sin(this.angle) * this.velocity,
+      velocityX: Math.random() * 10 - 5, //Math.cos(this.angle) * this.velocity,
+      velocityY: Math.random() * 10 - 5, //Math.sin(this.angle) * this.velocity,
       accelerationX: 0,
-      accelerationY: 0.05,
+      accelerationY: 0.025 + Math.random() * 0.025,
     };
     this.count = 0;
     this.active = false;
