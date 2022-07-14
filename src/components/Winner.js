@@ -8,7 +8,7 @@ function Winner({canvasFireworks, colorPalette}) {
     <>
       <div className={BumperCSS.holder}>
         {canvasFireworks && <Fireworks_CNVS explosions={20} colorPalette={colorPalette}></Fireworks_CNVS>}
-        {!canvasFireworks && <Fireworks explosions={20}></Fireworks>}
+        {!canvasFireworks && <Fireworks explosions={20} colorPalette={colorPalette}></Fireworks>}
         <div className={BumperCSS.textHolder}>You Win!!!</div>
       </div>
     </>
