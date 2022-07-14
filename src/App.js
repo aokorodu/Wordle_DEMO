@@ -6,7 +6,7 @@ function App() {
   const [max, setMax] = useState(6);
   const [length, setLength] = useState(5);
   const [start, setStart] = useState(false);
-  const [canvasFireworks, setCanvasFireworks] = useState(false);
+  const [canvasFireworks, setCanvasFireworks] = useState(true);
   const [fwPalette, setFWPalette] = useState("random")
   const fwColorArray = [];
   const fwColorTF = useRef(null)
@@ -486,7 +486,7 @@ function App() {
                 className={styles.settingsSelect}
                 name="fireworks"
                 onChange={updateFireworks}
-                defaultValue="0"
+                defaultValue="1"
               >
                 <option value={0}>SVG</option>
                 <option value={1}>Canvas</option>
