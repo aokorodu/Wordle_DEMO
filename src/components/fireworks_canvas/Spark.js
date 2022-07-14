@@ -33,7 +33,7 @@ class Spark {
     this.tau = Math.PI * 2;
 
     this.lifespan = 200;
-    this.lifeDX = .5 + Math.random();
+    this.lifeDX = 1 + Math.random();
   }
 
   isActive() {

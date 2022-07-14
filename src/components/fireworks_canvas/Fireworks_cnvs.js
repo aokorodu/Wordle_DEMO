@@ -3,7 +3,7 @@ import Spark from "./Spark";
 import styles from "./Fireworks.module.css";
 
 function Fireworks_CNVS({ explosions, colorPalette }) {
-  const numberOfSparks = 300;
+  const numberOfSparks = 250;
   const numberOfExplosions = explosions;
   let currentExplosion = 0;
   let sparkArray = [];
@@ -63,7 +63,7 @@ function Fireworks_CNVS({ explosions, colorPalette }) {
     const canvas = canvasRef.current;
     context = canvas.getContext("2d");
     sparkArray = getSparks(context);
-    hiDef(canvas, context);
+    //hiDef(canvas, context);
   }, []);
 
   const hiDef = (canvas, context) => {
